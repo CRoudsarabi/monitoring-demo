@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: createinitialtables
+      author: roudsarabi
+      changes:
+        # /=== CUSTOMER ===\ #
+        - createTable:
+            tableName: CUSTOMER
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  autoIncrement: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+
+        # /=== Item ===\ #
+        - createTable:
+            tableName: ITEM
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  autoIncrement: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+
+        # /=== Order ===\ #
+        - createTable:
+            tableName: Order
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  autoIncrement: true
+              - column:
+                  name: customer_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: item_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_date
+                  type: TIMESTAMP(6) WITH TIMEZONE
+                  constraints:
+                    nullable: false
+
+
