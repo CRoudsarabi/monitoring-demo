@@ -2,6 +2,8 @@ version: '3.7'
 
 networks:
   default:
+  monitoring:
+    name: monitoring
 volumes:
   prometheus_data: { }
   grafana_data: { }
@@ -31,6 +33,7 @@ services:
       - cadvisor
     networks:
       default:
+      monitoring:
     restart: unless-stopped
 
   cadvisor:
@@ -125,4 +128,3 @@ services:
     networks:
       default:
     restart: unless-stopped
-
