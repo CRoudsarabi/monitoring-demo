@@ -103,6 +103,8 @@ services:
     networks:
       default:
     restart: unless-stopped
+    ports:
+      - 3000:3000
 
   renderer:
     image: grafana/grafana-image-renderer:3.5.0
