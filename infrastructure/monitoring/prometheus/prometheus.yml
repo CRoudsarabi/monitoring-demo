@@ -21,14 +21,14 @@ scrape_configs:
       - targets:
           - monitoring-demo:9090
 
-  - job_name: 'blackbox-tester-https-test'
+  - job_name: 'blackbox-tester-https'
     metrics_path: /probe
     params:
       module: [ custom_https ]  # Look for a HTTP 200 response.
     scrape_interval: 30s
     static_configs:
       - targets:
-          - https://monitoring-demo/api/health/status
+          - monitoring-demo:8080/customers/any
     relabel_configs:
       - source_labels: [ __address__ ]
         target_label: __param_target

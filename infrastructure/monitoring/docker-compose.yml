@@ -116,4 +116,5 @@ services:
       - ./blackbox-config.yml:/etc/blackbox_exporter/config.yml
     networks:
       default:
+      monitoring:
     restart: unless-stopped
