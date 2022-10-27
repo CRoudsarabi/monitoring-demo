@@ -3,26 +3,26 @@ services:
   monitoring-demo:
     image: croudsarabi/monitoring-demo:latest
     labels:
-      # - com.centurylinklabs.watchtower.scope=application
       - monitoring-demo.container.importance=critical
     restart: unless-stopped
     environment:
       - SPRING_PROFILES_ACTIVE= postgres, drop-first
+    ports:
+      - 8080:8080
+      - 9090:9090
     networks:
       default:
+      monitoring:
 
   monitoring-demo-db:
     image: postgres
     labels:
-      #- com.centurylinklabs.watchtower.scope=infrastructure
       - monitoring-demo.container.importance=critical
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: ${MONITORING_DEMO_DB_PASSWORD}
       POSTGRES_USER: ${MONITORING_DEMO_DB_USER}
       POSTGRES_DB: ${MONITORING_DEMO_DB_NAME}
-    #    ports:
-    #      - 5432:5432
     volumes:
       - monitoringdemodb:/var/lib/postgresql/data
     networks:
@@ -30,6 +30,8 @@ services:
 
 networks:
   default:
+  monitoring:
+    external: true
 
 volumes:
   monitoringdemodb:
