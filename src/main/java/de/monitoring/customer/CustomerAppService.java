@@ -19,7 +19,7 @@ public class CustomerAppService {
         return customers.createCustomer(customer);
     }
 
-    @Timed("get.any.customer.service")
+    @Timed("customer.service.get.any")
     public Customer getAnyCustomer() {
         doSomeCalculation();
         return new Customer("Herbert", "herbert@andrena.de");
