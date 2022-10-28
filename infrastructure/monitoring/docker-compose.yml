@@ -12,7 +12,6 @@ services:
   prometheus:
     image: prom/prometheus:latest
     labels:
-      #- com.centurylinklabs.watchtower.scope=infrastructure
       - monitoring-demo.container.importance=high
     volumes:
       - ./prometheus/:/etc/prometheus/
@@ -39,7 +38,6 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     labels:
-      #- com.centurylinklabs.watchtower.scope=infrastructure
       - monitoring-demo.container.importance=high
     volumes:
       - '/:/rootfs:ro'
@@ -63,7 +61,6 @@ services:
   node-exporter:
     image: prom/node-exporter
     labels:
-      #- com.centurylinklabs.watchtower.scope=infrastructure
       - monitoring-demo.container.importance=high
     volumes:
       - /proc:/host/proc:ro
@@ -84,7 +81,6 @@ services:
   grafana:
     image: grafana/grafana:9.0.3
     labels:
-      # - com.centurylinklabs.watchtower.scope=infrastructure
       - monitoring-demo.container.importance=high
     user: "472"
     depends_on:
@@ -101,7 +97,6 @@ services:
   renderer:
     image: grafana/grafana-image-renderer:3.5.0
     labels:
-      #- com.centurylinklabs.watchtower.scope=infrastructure
       - monitoring-demo.container.importance=high
     networks:
       default:
@@ -110,10 +105,10 @@ services:
   blackbox:
     image: prom/blackbox-exporter:latest
     labels:
-      #- com.centurylinklabs.watchtower.scope=infrastructure
       - monitoring-demo.container.importance=high
     volumes:
       - ./blackbox-config.yml:/etc/blackbox_exporter/config.yml
     networks:
       default:
+      monitoring:
     restart: unless-stopped
